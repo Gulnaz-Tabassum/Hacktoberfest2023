@@ -1,0 +1,42 @@
+# Image Optimizing
+from PIL import Image, ImageFilter, ImageOps, ImageEnhance
+
+# Load the image
+im = Image.open("Image1.jpg")
+
+# Crop the image
+im = im.crop((34, 23, 100, 100))
+
+# Resize the image
+im = im.resize((50, 50))
+
+# Flip the image horizontally
+im = im.transpose(Image.FLIP_LEFT_RIGHT)
+
+# Rotate the image 360 degrees
+im = im.rotate(360)
+
+# Compress the image
+im.save("Image1.jpg", optimize=True, quality=90)
+
+# Apply blur effect
+im = im.filter(ImageFilter.BLUR)
+
+# Apply sharpening effect
+im = im.filter(ImageFilter.SHARPEN)
+
+# Adjust brightness
+enhancer = ImageEnhance.Brightness(im)
+im = enhancer.enhance(1.5)
+
+# Adjust contrast
+enhancer = ImageEnhance.Contrast(im)
+im = enhancer.enhance(1.5)
+
+# Add filters
+im = ImageOps.grayscale(im)
+im = ImageOps.invert(im)
+im = ImageOps.posterize(im, 4)
+
+# Save the optimized image
+im.save("Image1.jpg")
